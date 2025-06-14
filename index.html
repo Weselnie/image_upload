@@ -58,11 +58,46 @@
       border-radius: 25px;
       text-decoration: none;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .button:hover {
       background-color: var(--button-hover);
       transform: scale(1.05);
+    }
+
+    #gallery {
+      display: none;
+      margin-top: 30px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .photo {
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      background: white;
+    }
+
+    .photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+    }
+
+    .loading-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .footer {
@@ -85,6 +120,11 @@
       p {
         font-size: 1rem;
       }
+
+      .photos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+      }
     }
   </style>
 </head>
@@ -92,9 +132,82 @@
   <h1>Our Wedding Memories</h1>
   <p>Thank you for being part of our special day. You can share your photos with us or view everyone’s beautiful moments below.</p>
 
-  <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSchoLgn3lOpOcwvlh_LAic8pg4hZgDwKr_QjekO7kJ9w8goHw/viewform?usp=dialog" target="_blank">Upload Photos</a>
-  <a class="button" href="https://drive.google.com/drive/folders/1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb" target="_blank">View Gallery</a>
+  <a
+    class="button"
+    href="https://docs.google.com/forms/d/e/1FAIpQLSchoLgn3lOpOcwvlh_LAic8pg4hZgDwKr_QjekO7kJ9w8goHw/viewform?usp=dialog"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Upload Photos</a
+  >
+  <button class="button" id="viewBtn">View Gallery</button>
+
+  <div id="gallery" aria-live="polite" aria-label="Wedding photo gallery">
+    <div class="loading-text" id="loadingText" style="display:none;">
+      Loading photos...
+    </div>
+    <div class="photos-grid" id="photosGrid"></div>
+  </div>
 
   <div class="footer">Thank you for sharing the memories</div>
+
+  <script>
+    const apiKey = 'AIzaSyAYomhMC8ye5D2FbiCHUU9-eDhpQKFY7GQ'; // Replace with your Google Drive API key
+    const folderId = '1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb'; // Replace with your Google Drive folder ID
+
+    const viewBtn = document.getElementById('viewBtn');
+    const gallery = document.getElementById('gallery');
+    const photosGrid = document.getElementById('photosGrid');
+    const loadingText = document.getElementById('loadingText');
+
+    let galleryVisible = false;
+
+    viewBtn.addEventListener('click', () => {
+      galleryVisible = !galleryVisible;
+      if (galleryVisible) {
+        gallery.style.display = 'block';
+        viewBtn.textContent = 'Hide Gallery';
+        loadGallery();
+      } else {
+        gallery.style.display = 'none';
+        viewBtn.textContent = 'View Gallery';
+      }
+    });
+
+    function loadGallery() {
+      photosGrid.innerHTML = '';
+      loadingText.style.display = 'block';
+
+      const driveApiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'&fields=files(id,name)&key=${apiKey}`;
+
+      fetch(driveApiUrl)
+        .then(response => response.json())
+        .then(data => {
+          loadingText.style.display = 'none';
+
+          if (!data.files || data.files.length === 0) {
+            photosGrid.innerHTML = '<p>No photos found yet. Check back soon!</p>';
+            return;
+          }
+
+          data.files.forEach(file => {
+            const imgSrc = `https://drive.google.com/uc?export=view&id=1Ds2AnI9tU371Z5KYtFuSsGRPmb7U4dOJ`;
+            const div = document.createElement('div');
+            div.className = 'photo';
+
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = file.name || 'Wedding photo';
+
+            div.appendChild(img);
+            photosGrid.appendChild(div);
+          });
+        })
+        .catch(err => {
+          loadingText.style.display = 'none';
+          photosGrid.innerHTML = `<p>Error loading photos: ${err.message}</p>`;
+          console.error(err);
+        });
+    }
+  </script>
 </body>
 </html>
