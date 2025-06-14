@@ -1,25 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Event Photo Booth</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Wedding Memories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial; text-align: center; margin-top: 100px; }
-    a.button {
+    :root {
+      --main-bg: #fdfcf9;
+      --accent: #a68c6d;
+      --button-bg: #a68c6d;
+      --button-hover: #8b7354;
+      --text: #3e3e3e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--main-bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+    }
+
+    .button {
       display: inline-block;
-      padding: 15px 25px;
-      margin: 20px;
-      font-size: 20px;
-      background-color: #4CAF50;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 1rem;
+      font-weight: 600;
       color: white;
+      background-color: var(--button-bg);
+      border: none;
+      border-radius: 25px;
       text-decoration: none;
-      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: var(--button-hover);
+      transform: scale(1.05);
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .button {
+        width: 90%;
+        font-size: 1.05rem;
+        padding: 14px;
+      }
+
+      p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to the Event Gallery</h1>
-  <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSchoLgn3lOpOcwvlh_LAic8pg4hZgDwKr_QjekO7kJ9w8goHw/viewform?usp=dialog" target="_blank">Upload</a>
-  <a class="button" href="https://drive.google.com/drive/folders/1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb" target="_blank">View</a>
+  <h1>Our Wedding Memories</h1>
+  <p>Thank you for being part of our special day. You can share your photos with us or view everyone’s beautiful moments below.</p>
+
+  <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSchoLgn3lOpOcwvlh_LAic8pg4hZgDwKr_QjekO7kJ9w8goHw/viewform?usp=dialog" target="_blank">Upload Photos</a>
+  <a class="button" href="https://drive.google.com/drive/folders/1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb" target="_blank">View Gallery</a>
+
+  <div class="footer">Thank you for sharing the memories</div>
 </body>
 </html>
