@@ -68,7 +68,7 @@ def generate_image_index(image_dir, output_path):
     print(f"Written {output_path}")
 
 # === MAIN ===
-#if __name__ == '__main__':
-#    download_images()
-#    generate_image_index('images', 'images.json')
-#    git_commit_and_push()
+if __name__ == '__main__':
+    download_images()
+    generate_image_index('images', 'images.json')
+    git_commit_and_push()
