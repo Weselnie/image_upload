@@ -158,7 +158,7 @@
   toggleBtn.addEventListener('click', () => {
     isVisible = !isVisible;
     gallery.style.display = isVisible ? 'flex' : 'none';
-    toggleBtn.textContent = isVisible ? 'TEST Hide Gallery Preview' : 'TEST View Gallery Preview';
+    toggleBtn.textContent = isVisible ? 'Hide Gallery Preview' : 'View Gallery Preview';
 
     // Only load images once
     if (isVisible && gallery.children.length === 0) {
