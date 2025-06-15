@@ -8,9 +8,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# JSON secret
-*.json
-
 # Dependency directories
 node_modules/
 bower_components/
