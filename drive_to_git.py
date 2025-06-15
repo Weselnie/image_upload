@@ -6,7 +6,8 @@ from googleapiclient.http import MediaIoBaseDownload
 from google.oauth2 import service_account
 
 # === CONFIG ===
-SERVICE_ACCOUNT_FILE = 'service-account-key.json'
+#SERVICE_ACCOUNT_FILE = 'service-account-key.json'
+SERVICE_ACCOUNT_PATH = 'C:/Users/user/Desktop/Kasia Wesele/service-account-key.json'
 FOLDER_ID = '1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb'
 GITHUB_REPO_PATH = 'C:/Users/user/image_upload'  #   /path/to/your/cloned/repo'
 TARGET_FOLDER = os.path.join(GITHUB_REPO_PATH, 'images')
@@ -14,7 +15,7 @@ TARGET_FOLDER = os.path.join(GITHUB_REPO_PATH, 'images')
 # === SETUP GOOGLE DRIVE API ===
 SCOPES = ['https://www.googleapis.com/auth/drive']
 creds = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    SERVICE_ACCOUNT_PATH, scopes=SCOPES)
 
 drive_service = build('drive', 'v3', credentials=creds)
 
