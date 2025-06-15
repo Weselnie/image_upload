@@ -72,4 +72,7 @@ def generate_image_index(image_dir, output_path):
 if __name__ == '__main__':
     download_images()
     git_commit_and_push()
+    print("Current working directory:", os.getcwd())
+    print("Contents:", os.listdir())
+    print("Images folder contents:", os.listdir('images'))
     generate_image_index('images', 'images.json')
