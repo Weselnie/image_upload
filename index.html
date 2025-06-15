@@ -128,26 +128,39 @@
   <div class="footer">Thank you for sharing the memories</div>
 
   <script>
-    const gallery = document.getElementById('gallery');
-    const toggleBtn = document.getElementById('toggleGallery');
-    const totalImages = 4; // Adjust based on available images
+  const gallery = document.getElementById('gallery');
+  const toggleBtn = document.getElementById('toggleGallery');
+  let isVisible = false;
 
-    let isVisible = false;
+  // Fetch image list from images.json
+  async function loadGallery() {
+    try {
+      const res = await fetch('images.json');
+      const images = await res.json();
 
-    // Load images dynamically
-    for (let i = 1; i <= totalImages; i++) {
-      const img = document.createElement('img');
-      img.src = `images/img${i}.jpg`;
-      img.alt = `Wedding photo ${i}`;
-      gallery.appendChild(img);
+      images.forEach((file) => {
+        const img = document.createElement('img');
+        img.src = `images/${file}`;
+        img.alt = file;
+        gallery.appendChild(img);
+      });
+    } catch (err) {
+      console.error('Failed to load images:', err);
+      gallery.innerHTML = '<p>Could not load gallery images.</p>';
     }
+  }
 
-    // Toggle dropdown
-    toggleBtn.addEventListener('click', () => {
-      isVisible = !isVisible;
-      gallery.style.display = isVisible ? 'flex' : 'none';
-      toggleBtn.textContent = isVisible ? 'Hide Gallery' : 'View Gallery';
-    });
+  // Toggle dropdown
+  toggleBtn.addEventListener('click', () => {
+    isVisible = !isVisible;
+    gallery.style.display = isVisible ? 'flex' : 'none';
+    toggleBtn.textContent = isVisible ? 'Hide Gallery' : 'View Gallery';
+
+    // Only load images once
+    if (isVisible && gallery.children.length === 0) {
+      loadGallery();
+    }
+  });
   </script>
 </body>
 </html>
