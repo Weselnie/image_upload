@@ -4,6 +4,7 @@ import subprocess
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 from google.oauth2 import service_account
+import json
 
 # === CONFIG ===
 #SERVICE_ACCOUNT_FILE = 'service-account-key.json'
@@ -57,7 +58,16 @@ def git_commit_and_push():
     subprocess.run(['git', 'push'], check=True)
     print("Changes pushed to GitHub.")
 
+def generate_image_index(image_dir, output_path):
+    images = [
+        f for f in os.listdir(image_dir)
+        if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+    ]
+    with open(output_path, 'w') as f:
+        json.dump(images, f)
+
 # === MAIN ===
 if __name__ == '__main__':
     download_images()
     git_commit_and_push()
+    generate_image_index('images', 'images.json')

@@ -27,7 +27,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
       text-align: center;
       padding: 30px 20px;
@@ -58,10 +58,30 @@
       border-radius: 25px;
       text-decoration: none;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .button:hover {
       background-color: var(--button-hover);
+      transform: scale(1.05);
+    }
+
+    .gallery {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .gallery img {
+      width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
       transform: scale(1.05);
     }
 
@@ -85,6 +105,11 @@
       p {
         font-size: 1rem;
       }
+
+      .gallery img {
+        width: 100%;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
@@ -93,8 +118,36 @@
   <p>Thank you for being part of our special day. You can share your photos with us or view everyone’s beautiful moments below.</p>
 
   <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSchoLgn3lOpOcwvlh_LAic8pg4hZgDwKr_QjekO7kJ9w8goHw/viewform?usp=dialog" target="_blank">Upload Photos</a>
-  <a class="button" href="https://drive.google.com/drive/folders/1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb" target="_blank">View Gallery</a>
+
+  <!-- View Gallery acts as dropdown trigger -->
+  <button class="button" id="toggleGallery">View Gallery</button>
+
+  <!-- Image Gallery -->
+  <div class="gallery" id="gallery"></div>
 
   <div class="footer">Thank you for sharing the memories</div>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+    const toggleBtn = document.getElementById('toggleGallery');
+    const totalImages = 4; // Adjust based on available images
+
+    let isVisible = false;
+
+    // Load images dynamically
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement('img');
+      img.src = `images/img${i}.jpg`;
+      img.alt = `Wedding photo ${i}`;
+      gallery.appendChild(img);
+    }
+
+    // Toggle dropdown
+    toggleBtn.addEventListener('click', () => {
+      isVisible = !isVisible;
+      gallery.style.display = isVisible ? 'flex' : 'none';
+      toggleBtn.textContent = isVisible ? 'Hide Gallery' : 'View Gallery';
+    });
+  </script>
 </body>
 </html>
