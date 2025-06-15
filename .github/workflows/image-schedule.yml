@@ -30,14 +30,14 @@ jobs:
         export GOOGLE_APPLICATION_CREDENTIALS=gcp-key.json
         python drive_to_git.py
 
-    - name: Set up Git
+    - name: Set up Git config
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
     
-    - name: Commit & Push
+    - name: Commit and push changes
       run: |
         git add .
-        git commit -m "Auto-sync images from Drive" || echo "No changes to commit"
+        git commit -m "Auto-sync images from Drive" || echo "Nothing to commit"
         git push
