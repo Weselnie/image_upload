@@ -119,8 +119,12 @@
 
   <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSchoLgn3lOpOcwvlh_LAic8pg4hZgDwKr_QjekO7kJ9w8goHw/viewform?usp=dialog" target="_blank">Upload Photos</a>
 
+  <!-- View full gallery in Google Drive-->
+  <a class="button" href="https://drive.google.com/drive/folders/1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb" target="_blank">View Full Gallery</a>
+
+
   <!-- View Gallery acts as dropdown trigger -->
-  <button class="button" id="toggleGallery">View Gallery</button>
+  <button class="button" id="toggleGallery">View Gallery Preview</button>
 
   <!-- Image Gallery -->
   <div class="gallery" id="gallery"></div>
@@ -154,7 +158,7 @@
   toggleBtn.addEventListener('click', () => {
     isVisible = !isVisible;
     gallery.style.display = isVisible ? 'flex' : 'none';
-    toggleBtn.textContent = isVisible ? 'Hide Gallery' : 'View Gallery';
+    toggleBtn.textContent = isVisible ? 'Hide Gallery Preview' : 'View Gallery Preview';
 
     // Only load images once
     if (isVisible && gallery.children.length === 0) {
