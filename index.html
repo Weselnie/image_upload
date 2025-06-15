@@ -142,6 +142,9 @@
       const res = await fetch('images.json');
       const images = await res.json();
 
+      // only load first 10 images
+      const limitedImages = images.slice(0,10);
+
       images.forEach((file) => {
         const img = document.createElement('img');
         img.src = `images/${file}`;
