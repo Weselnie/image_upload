@@ -63,8 +63,10 @@ def generate_image_index(image_dir, output_path):
         f for f in os.listdir(image_dir)
         if f.lower().endswith(('.jpg', '.jpeg', '.png'))
     ]
+    print(f"Found images: {images}")
     with open(output_path, 'w') as f:
         json.dump(images, f)
+    print(f"Written {output_path}")
 
 # === MAIN ===
 if __name__ == '__main__':
