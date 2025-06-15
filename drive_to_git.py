@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 import json
 
 # === CONFIG ===
-SERVICE_ACCOUNT_PATH = 'service-account-key.json'
+SERVICE_ACCOUNT_PATH = 'gcp-key.json'
 FOLDER_ID = '1U7OG43L2CxsB3rdrGXHFwA8e_xWLb3IcYlrFaZhhVEmuEyu0u7_Ic-wMHEyquc83bGE1B2Eb'
 GITHUB_REPO_PATH = '.'
 TARGET_FOLDER = os.path.join(GITHUB_REPO_PATH, 'images')
