@@ -2,7 +2,7 @@ name: Sync Images from Google Drive
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # every 30 minutes
+    - cron: '0 0,12 * * *'  # */30 * * * * = every 30 minutes
   workflow_dispatch:        # allows manual trigger
 
 jobs:
